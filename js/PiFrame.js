@@ -11,7 +11,6 @@ const base_url = "https://api.giphy.com/v1/gifs/random?tag=animals&rating=G&api_
 var timer;
 
 function startTimer() { timer = window.setTimeout(getNewGif, timeout); }
-
 function stopTimer() { window.clearTimeout(timer); }
 
 function displayGif(url) {
@@ -23,22 +22,23 @@ function getNewGif() {
 
     $.getJSON(url, function(data) {
         buffer.append(data["data"]["images"]["original"]["url"]);
+        console.log("Added URL " + buffer.getCurr());
         var num_frames = data["data"]["images"]["original"]["frames"];
         displayGif(buffer.getNext());
-        // set timer to length of gif 
+        startTimer();
     })
 }
 
 function handleSwipeLeft() {
     stopTimer();
-    try { displayGif(buff.getPrev()); }
+    try { displayGif(buffer.getPrev()); }
     catch { console.log("Swipe left on an empty buffer"); }
     startTimer();
 }
 
 function handleSwipeRight() {
     stopTimer();
-    try { displayGif(buff.getNext()); }
+    try { displayGif(buffer.getNext()); }
     catch { console.log("Swipe right on an empty buffer"); }
     startTimer();
 }

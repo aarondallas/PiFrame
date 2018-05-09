@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test CircularBuffer.js</title>
+    <script type="text/javascript" src="../CircularBuffer.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    const cb = new CircularBuffer(10);
+    console.log(cb.getLength() === 0 ? "success" : "fail");
+    for(var i=0; i<=9; i++) {
+        cb.append(i)
+    }
+    console.log(cb.getLength() === cb.max_length ? "success" : cb.buffer);
+    //console.log(cb.buffer);
+
+    // append another item
+    cb.append(10);
+    //console.log(cb.buffer);
+    console.log(cb.getLength() === cb.max_length ? "success" : cb.buffer);
+    console.log(cb.getNext() === 10 ? "success" : cb.buffer[cb.read_index]);
+    console.log(cb.getNext() === 1 ? "success" : cb.buffer[cb.read_index]);
+
+    // append a bunch more items
+    for(var i=11; i<=20; i++) {
+        cb.append(i)
+    }
+    //console.log(cb.buffer);
+
+    console.log(cb.getPrev() === 20 ? "success" : cb.buffer[cb.read_index]);
+    console.log(cb.getPrev() === 19 ? "success" : cb.buffer[cb.read_index]);
+    console.log(cb.getCurr() === 19 ? "success" : cb.buffer[cb.read_index]);
+</script>
+
+</body>
+</html>

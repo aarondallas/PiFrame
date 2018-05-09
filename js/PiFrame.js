@@ -3,9 +3,16 @@
 <script type="text/javascript" src="CircularBuffer.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-var buffer = new CircularBuffer(10);
-var api_key = "";
-var base_url = "https://api.giphy.com/v1/gifs/random?tag=animals&rating=G&api_key="
+const timeout = 6000; // 6 seconds
+const buffer = new CircularBuffer(10);
+const api_key = "";
+const base_url = "https://api.giphy.com/v1/gifs/random?tag=animals&rating=G&api_key="
+
+var timer;
+
+function startTimer() { timer = window.setTimeout(getNewGif, timeout); }
+
+function stopTimer() { window.clearTimeout(timer); }
 
 function displayGif(url) {
     // TODO
@@ -23,17 +30,17 @@ function getNewGif() {
 }
 
 function handleSwipeLeft() {
-    // TODO stop timer
+    stopTimer();
     try { displayGif(buff.getPrev()); }
     catch { console.log("Swipe left on an empty buffer"); }
-    // TODO restart timer
+    startTimer();
 }
 
 function handleSwipeRight() {
-    // TODO stop timer
+    stopTimer();
     try { displayGif(buff.getNext()); }
     catch { console.log("Swipe right on an empty buffer"); }
-    // TODO restart timer
+    startTimer();
 }
 
 $.ready(function() { getNewGif(buffer); })

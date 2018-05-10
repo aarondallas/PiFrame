@@ -28,13 +28,6 @@ class CircularBuffer {
         }
     }
 
-    getCurr() {
-        if(!this.getLength())
-            throw new Error("Buffer is empty");
-
-        return this.buffer[this.read_index];
-    }
-
     getNext() {
         if(!this.getLength())
             throw new Error("Buffer is empty");
@@ -52,6 +45,7 @@ class CircularBuffer {
             throw new Error("Buffer is empty");
 
         this.read_index = this.read_index === null ? 0 : this.read_index - 1;
+
         if(this.read_index < 0)
             this.read_index = this.getLength() - 1;
 

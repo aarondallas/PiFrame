@@ -42,7 +42,7 @@ function handleSwipeLeft(event) {
     console.log("Handling swipe left event");
     stopTimer();
     try { displayGif(buffer.getNext()); }
-    catch { console.log("Swipe left on an empty buffer"); }
+    catch(e) { console.log("Swipe left on an empty buffer"); }
     startTimer();
 }
 
@@ -51,7 +51,7 @@ function handleSwipeRight(event) {
     console.log("Handling swipe right event");
     stopTimer();
     try { displayGif(buffer.getPrev()); }
-    catch { console.log("Swipe right on an empty buffer"); }
+    catch(e) { console.log("Swipe right on an empty buffer"); }
     startTimer();
 }
 

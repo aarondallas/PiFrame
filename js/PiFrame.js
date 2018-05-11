@@ -3,7 +3,7 @@
 
 const timeout = 6000; // 6 seconds
 const buffer = new CircularBuffer(10);
-const api_key = "";
+const api_key = "w6Zi5nqyI5RzW4xxvz63ramNdpXVzMzE";
 const base_url = "https://api.giphy.com/v1/gifs/random?tag=animals&rating=G&api_key="
 
 var timer;
